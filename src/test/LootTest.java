@@ -10,9 +10,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Conquest;
+import entities.Loot;
 
-public class ConquestTest {
+public class LootTest {
 
 	private EntityManagerFactory emf;
     private EntityManager em;
@@ -26,20 +26,11 @@ public class ConquestTest {
 
 	@Test
 	public void test() {
-		Conquest conquest = em.find(Conquest.class, 1);
+		Loot loot = em.find(Loot.class, 1);
 		
-		assertEquals("Chaos Witch Quelaag", conquest.getFoe());
-		assertEquals(20000, conquest.getGold());
-//		assertEquals("Description", conquest.getTale()); //Passes
-		assertEquals(1, conquest.getLoot().size());
-		
-		Conquest anotherConquest = em.find(Conquest.class, 7);
-		
-//		assertEquals("Gwyn Lord of Cinder", anotherConquest.getFoe());
-		assertEquals(2, anotherConquest.getLoot().size());
-		
+		assertEquals("Quelaag's Furysword", loot.getName());
 	}
-	
+
 	@After
 	public void tearDown() throws Exception {
 		em.close();

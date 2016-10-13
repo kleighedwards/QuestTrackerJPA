@@ -1,9 +1,15 @@
 package entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Conquest {
@@ -16,6 +22,11 @@ public class Conquest {
 	private String land;
 	private String tale;
 	private int gold;
+	private String image;
+	
+	@OneToMany(fetch=FetchType.EAGER, orphanRemoval=true, cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name="conquest_id", referencedColumnName="id", nullable = false)
+    private Set<Loot> loot;
 	
 	// Gets and Sets
 	public String getFoe() {
@@ -50,6 +61,22 @@ public class Conquest {
 		this.gold = gold;
 	}
 	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Set<Loot> getLoot() {
+		return loot;
+	}
+
+	public void setLoot(Set<Loot> loot) {
+		this.loot = loot;
+	}
+
 	public int getId() {
 		return id;
 	}
