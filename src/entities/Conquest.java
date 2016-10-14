@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,10 +20,13 @@ public class Conquest {
     private int id;
 	
 	private String foe;
-	private String land;
 	private String tale;
 	private int gold;
 	private String image;
+	
+	@ManyToOne()
+    @JoinColumn(name="land_id", referencedColumnName="id", nullable = false)
+	private Land land;
 	
 	@OneToMany(fetch=FetchType.EAGER, orphanRemoval=true, cascade={CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name="conquest_id", referencedColumnName="id", nullable = false)
@@ -36,12 +40,12 @@ public class Conquest {
 	public void setFoe(String foe) {
 		this.foe = foe;
 	}
-	
-	public String getLand() {
+
+	public Land getLand() {
 		return land;
 	}
 
-	public void setLand(String land) {
+	public void setLand(Land land) {
 		this.land = land;
 	}
 
@@ -83,6 +87,8 @@ public class Conquest {
 
 	@Override
 	public String toString() {
-		return "Conquest [id=" + id + ", foe=" + foe + ", land=" + land + ", gold=" + gold + "]";
+		return "Conquest [id=" + id + ", foe=" + foe + ", tale=" + tale + ", gold=" + gold + ", image=" + image
+				+ ", land=" + land + ", loot=" + loot + "]";
 	}
+
 }
